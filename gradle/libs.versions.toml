@@ -1,0 +1,77 @@
+[versions]
+agp = "8.13.2"
+kotlin = "2.0.21"
+ksp = "2.0.21-1.0.27"
+ktlint = "11.6.1"
+
+# AndroidX
+androidx-appcompat = "1.6.1"
+androidx-constraintlayout = "2.1.4"
+androidx-core = "1.12.0"
+androidx-lifecycle = "2.6.2" # Вместо старого extensions
+androidx-navigation = "2.7.5"
+androidx-room = "2.6.0"
+
+# Google & UI
+material = "1.10.0"
+speed-dial = "3.3.0"
+
+# Network & DI
+retrofit = "2.9.0"
+koin = "3.5.0"
+glide = "4.16.0"
+
+# Testing
+junit = "4.13.2"
+mockk = "1.13.8"
+androidx-test-ext = "1.1.5"
+espresso = "3.5.1"
+
+[libraries]
+# AndroidX Core
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
+androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "androidx-navigation" }
+androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "androidx-navigation" }
+
+# Lifecycle (Вместо extensions)
+androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+
+# UI
+google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+ui-speed-dial = { group = "com.leinardi.android", name = "speed-dial", version.ref = "speed-dial" }
+
+# Network
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+
+# Persistence
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+
+# Glide
+glide-core = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+
+# DI
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+
+# Test
+test-junit = { group = "junit", name = "junit", version.ref = "junit" }
+test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+android-test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+
+
+[bundles]
+navigation = ["androidx-navigation-fragment", "androidx-navigation-ui"]
+retrofit = ["retrofit-core", "retrofit-gson"]
+lifecycle = ["androidx-lifecycle-viewmodel", "androidx-lifecycle-runtime"]

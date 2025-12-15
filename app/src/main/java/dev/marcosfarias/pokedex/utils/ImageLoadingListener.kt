@@ -8,10 +8,11 @@ import com.bumptech.glide.request.target.Target
 
 class ImageLoadingListener(private val listener: OnLoadFinishedListener) :
     RequestListener<Drawable> {
+
     override fun onLoadFailed(
         e: GlideException?,
         model: Any?,
-        target: Target<Drawable>?,
+        target: Target<Drawable?>,
         isFirstResource: Boolean
     ): Boolean {
         listener.invoke()
@@ -19,10 +20,10 @@ class ImageLoadingListener(private val listener: OnLoadFinishedListener) :
     }
 
     override fun onResourceReady(
-        resource: Drawable?,
-        model: Any?,
-        target: Target<Drawable>?,
-        dataSource: DataSource?,
+        resource: Drawable,
+        model: Any,
+        target: Target<Drawable?>?,
+        dataSource: DataSource,
         isFirstResource: Boolean
     ): Boolean {
         listener.invoke()

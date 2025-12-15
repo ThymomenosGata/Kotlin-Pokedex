@@ -1,23 +1,26 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-parcelize")
-    id("kotlin-kapt")
-    id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.ktlint)
 }
-apply(from = "../ktlint.gradle.kts")
 
 android {
-    compileSdk = 33
-    buildToolsVersion = "33.0.0"
+    namespace = "dev.marcosfarias.pokedex"
+
+    compileSdk {
+        version = release(version = 36)
+    }
+
     defaultConfig {
         applicationId = "dev.marcosfarias.pokedex"
         minSdk = 23
-        targetSdk = 33
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -27,64 +30,50 @@ android {
             )
         }
     }
+
+    ktlint {
+        android.set(true)
+        ignoreFailures.set(true)
+        reporters {
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE) // Для отчетов в Jenkins/Gitlab
+        }
+    }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
+
     buildFeatures {
         viewBinding = true
     }
-    namespace = "dev.marcosfarias.pokedex"
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    // AndroidX & UI
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.google.material)
+    implementation(libs.bundles.navigation)
+    implementation(libs.bundles.lifecycle)
+    implementation(libs.ui.speed.dial)
 
-    // Architecture
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    // Network & DI
+    implementation(libs.bundles.retrofit)
+    implementation(libs.koin.android)
 
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
-
-    // Material
-    implementation("com.google.android.material:material:1.8.0")
-
-    // Third Party
-    implementation("com.leinardi.android:speed-dial:3.3.0")
-
-    // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-    // Persistence
-    implementation("androidx.room:room-runtime:2.5.0")
-    kapt("androidx.room:room-compiler:2.5.0")
+    // Room
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler) // ПЕРЕШЛИ НА KSP
 
     // Glide
-    kapt("com.github.bumptech.glide:compiler:4.13.2")
-    implementation("com.github.bumptech.glide:glide:4.13.2")
+    implementation(libs.glide.core)
+    ksp(libs.glide.compiler) // ПЕРЕШЛИ НА KSP
 
-    // Koin
-    implementation("io.insert-koin:koin-android:3.2.0")
-    implementation("io.insert-koin:koin-core:3.2.0")
-
-    // Test
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:3.0.2")
-    androidTestImplementation("androidx.navigation:navigation-testing:2.5.3")
-    debugImplementation("androidx.fragment:fragment-testing:1.5.5")
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
-    androidTestImplementation("io.mockk:mockk-android:1.12.4")
-    androidTestImplementation("io.mockk:mockk-agent-jvm:1.12.4")
-    testImplementation("io.mockk:mockk:1.12.4")
-    testImplementation("io.mockk:mockk-agent-jvm:1.12.4")
+    // Testing
+    testImplementation(libs.test.junit)
+    testImplementation(libs.test.mockk)
+    androidTestImplementation(libs.android.test.espresso)
 }
