@@ -1,0 +1,31 @@
+package dev.marcosfarias.pokedex.domain.entity
+
+data class Pokemon(
+    val id: String,
+    val abilities: List<String>,
+    val attack: Int,
+    val baseExp: String,
+    val category: String,
+    val cycles: String,
+    val defense: Int,
+    val eggGroups: String,
+    val evolutions: List<String>,
+    val evolvedFrom: String,
+    val femalePercentage: String,
+    val genderless: Int,
+    val height: String,
+    val hp: Int,
+    val imageUrl: String,
+    val malePercentage: String,
+    val name: String,
+    val reason: String,
+    val specialAttack: Int,
+    val specialDefense: Int,
+    val speed: Int,
+    val total: Int,
+    val typeOfPokemon: List<String>,
+    val weaknesses: List<String>,
+    val weight: String,
+    val xDescription: String,
+    val yDescription: String
+)

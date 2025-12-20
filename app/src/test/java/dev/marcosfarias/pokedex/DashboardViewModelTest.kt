@@ -3,7 +3,7 @@ package dev.marcosfarias.pokedex
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import dev.marcosfarias.pokedex.database.dao.PokemonDAO
+import dev.marcosfarias.pokedex.data.local.dao.PokemonDAO
 import dev.marcosfarias.pokedex.model.Pokemon
 import dev.marcosfarias.pokedex.ui.dashboard.DashboardViewModel
 import io.mockk.*

@@ -2,7 +2,7 @@ package dev.marcosfarias.pokedex.ui.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import dev.marcosfarias.pokedex.database.dao.PokemonDAO
+import dev.marcosfarias.pokedex.data.local.dao.PokemonDAO
 import dev.marcosfarias.pokedex.model.Pokemon
 
 class DashboardViewModel(private val pokemonDAO: PokemonDAO) : ViewModel() {
