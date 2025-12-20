@@ -183,3 +183,27 @@ internal fun Pokemon.toPokemonDto() = PokemonDto(
     xDescription = xDescription,
     yDescription = yDescription
 )
+
+internal fun List<PokemonEntity>.toPokemonDomain() = this.map {
+    it.toPokemonDomain()
+}
+
+internal fun List<PokemonEntity>.toPokemonDto() = this.map {
+    it.toPokemonDto()
+}
+
+internal fun List<Pokemon>.toPokemonEntity() = this.map {
+    it.toPokemonEntity()
+}
+
+internal fun List<Pokemon>.toPokemonDto() = this.map {
+    it.toPokemonDto()
+}
+
+internal fun List<PokemonDto>.toPokemonEntity() = this.map {
+    it.toPokemonEntity()
+}
+
+internal fun List<PokemonDto>.toPokemonDomain() = this.map {
+    it.toPokemonDomain()
+}

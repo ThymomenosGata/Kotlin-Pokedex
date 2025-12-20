@@ -1,8 +1,17 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktlint)
+}
+
+val properties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        load(file.inputStream())
+    }
 }
 
 android {
@@ -46,7 +55,45 @@ android {
     }
 
     buildFeatures {
+        android.buildFeatures.buildConfig = true
         viewBinding = true
+    }
+
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("pokemon_keystore.jks")
+            storePassword = properties["KEY_STORE_PASSWORD"] as String?
+            keyAlias = "key0"
+            keyPassword = properties["KEY_PASSWORD"] as String?
+        }
+
+        create("release") {
+            storeFile = file("pokemon_keystore.jks")
+            storePassword = properties["KEY_STORE_PASSWORD"] as String?
+            keyAlias = "key0"
+            keyPassword = properties["KEY_PASSWORD"] as String?
+        }
+    }
+
+    buildTypes {
+        getByName("debug") {
+            buildConfigField("String", "BASE_URL", "\"${properties["BASE_URL_DEBUG"]}\"")
+            signingConfig = signingConfigs.getByName("debug")
+            isMinifyEnabled = false
+            isDebuggable = true
+        }
+
+        getByName("release") {
+            buildConfigField("String", "BASE_URL", "\"${properties["BASE_URL_RELEASE"]}\"")
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
+            isDebuggable = false
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
     }
 }
 

@@ -1,22 +1,29 @@
 package dev.marcosfarias.pokedex.data.remote.api
 
+import dev.marcosfarias.pokedex.BuildConfig
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiClient {
 
     companion object {
-        var instance: Retrofit? = null
+        private val pokemonDexApi: PokemonDexApi? = null
 
-        fun getInstance(): Retrofit {
-            if (instance == null) {
-                instance = Retrofit.Builder()
-                    .baseUrl("https://gist.githubusercontent.com/mrcsxsiq/b94dbe9ab67147b642baa9109ce16e44/raw/97811a5df2df7304b5bc4fbb9ee018a0339b8a38/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-            }
-            return instance!!
+        fun getApi(): PokemonDexApi {
+            if (pokemonDexApi != null) return pokemonDexApi
+            return create()
+        }
+
+        private fun create(): PokemonDexApi {
+            val client = OkHttpClient.Builder()
+
+            return Retrofit.Builder()
+                .baseUrl(BuildConfig.BASE_URL)
+                .client(client.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(PokemonDexApi::class.java)
         }
     }
-
 }

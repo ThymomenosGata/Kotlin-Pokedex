@@ -11,12 +11,8 @@ class SavePokemonUseCase(
 ) {
 
     suspend operator fun invoke(pokemon: Pokemon) = flow<Result<Any>> {
-        runCatching {
-            pokemonRepository.addPokemon(pokemon)
-            emit(Result.Success(Any()))
-        }.onFailure {
-            emit(Result.Error(AppError.Unknown(it.message ?: UNKNOWN_ERROR)))
-        }
+        pokemonRepository.addPokemon(pokemon)
+        emit(Result.Success(Any()))
     }
 
     private companion object {

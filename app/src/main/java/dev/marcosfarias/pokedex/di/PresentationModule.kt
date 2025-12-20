@@ -7,7 +7,7 @@ import dev.marcosfarias.pokedex.ui.pokedex.PokedexViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val viewModelsModule = module {
+val presentationModule = module {
     viewModel { DashboardViewModel(get()) }
     viewModel { GenerationViewModel() }
     viewModel { HomeViewModel() }

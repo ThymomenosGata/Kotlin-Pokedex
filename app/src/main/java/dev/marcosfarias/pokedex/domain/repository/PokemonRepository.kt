@@ -1,26 +1,25 @@
 package dev.marcosfarias.pokedex.domain.repository
 
 import dev.marcosfarias.pokedex.domain.entity.Pokemon
+import dev.marcosfarias.pokedex.domain.entity.Result
 
 
 interface PokemonRepository {
 
-    fun getAllPokemons(): List<Pokemon>
+    suspend fun getAllLocalPokemon(): Result<List<Pokemon>>
 
-    fun getAllLocalPokemons(): List<Pokemon>
+    suspend fun getAllRemotePokemon(): Result<List<Pokemon>>
 
-    fun getRemotePokemons(): List<Pokemon>
+    suspend fun getLocalPokemonById(id: String): Result<Pokemon>
 
-    fun getLocalPokemonById(id: String): Pokemon?
+    suspend fun getLocalEvolutionsById(ids: List<String>): Result<List<Pokemon>>
 
-    fun getLocalEvolutionsById(id: String): List<Pokemon>
+    suspend fun addPokemon(pokemon: Pokemon): Result<Long>
 
-    fun addPokemon(pokemon: Pokemon)
+    suspend fun addMoreThenOnePokemon(pokemons: List<Pokemon>): Result<Long>
 
-    fun addMoreThenOnePokemon(pokemons: List<Pokemon>)
+    suspend fun deleteAllPokemon(): Result<Int>
 
-    fun deleteAllPokemon()
-
-    fun deletePokemon(pokemon: Pokemon)
+    suspend fun deletePokemon(pokemon: Pokemon): Result<Int>
 
 }
