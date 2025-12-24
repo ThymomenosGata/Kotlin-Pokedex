@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import dev.marcosfarias.pokedex.data.local.AppDatabase.Companion.CURRENT_DB_VERSION
 import dev.marcosfarias.pokedex.data.local.dao.PokemonDAO
-import dev.marcosfarias.pokedex.model.Pokemon
+import dev.marcosfarias.pokedex.data.local.entity.PokemonEntity
 
 @Database(
     entities = [
-        Pokemon::class
+        PokemonEntity::class
     ],
     version = CURRENT_DB_VERSION,
     exportSchema = true

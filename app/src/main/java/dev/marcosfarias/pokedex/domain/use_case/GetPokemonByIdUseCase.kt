@@ -1,6 +1,6 @@
 package dev.marcosfarias.pokedex.domain.use_case
 
-import dev.marcosfarias.pokedex.domain.entity.AppError
+import dev.marcosfarias.pokedex.domain.entity.AppState
 import dev.marcosfarias.pokedex.domain.entity.Pokemon
 import dev.marcosfarias.pokedex.domain.entity.Result
 import dev.marcosfarias.pokedex.domain.repository.PokemonRepository
@@ -11,17 +11,13 @@ class GetPokemonByIdUseCase(
 ) {
 
     suspend operator fun invoke(id: String) = flow<Result<Pokemon>> {
-        runCatching {
-            val pokemon = pokemonRepository.getLocalPokemonById(id)
-            if (pokemon == null) emit(Result.Error(AppError.NotFound))
-            else emit(Result.Success(pokemon))
-        }.onFailure { ex ->
-            emit(Result.Error(AppError.Unknown(ex.message ?: UNKNOWN_ERROR)))
-        }
-    }
+        val result = pokemonRepository.getLocalPokemonById(id)
 
-    private companion object {
-        const val UNKNOWN_ERROR = "Error"
+        if (result is Result.Success && result.data != null) {
+            emit(result)
+        }
+
+        emit(Result.Failure(AppState.NotFound))
     }
 
 }

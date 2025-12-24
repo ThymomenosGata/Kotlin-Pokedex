@@ -17,7 +17,7 @@ class PokemonRepositoryImpl(
 ) : PokemonRepository {
 
     override suspend fun getAllLocalPokemon(): Result<List<Pokemon>> = safeDbCall {
-        appDatabase.pokemonDAO().all().toPokemonDomain()
+        appDatabase.pokemonDAO().getAll()?.toPokemonDomain()
     }
 
     override suspend fun getAllRemotePokemon(): Result<List<Pokemon>> = safeApiCall {
@@ -27,19 +27,19 @@ class PokemonRepositoryImpl(
     }
 
     override suspend fun getLocalPokemonById(id: String): Result<Pokemon> = safeDbCall {
-        appDatabase.pokemonDAO().getById(id).toPokemonDomain()
+        appDatabase.pokemonDAO().getById(id)?.toPokemonDomain()
     }
 
     override suspend fun getLocalEvolutionsById(ids: List<String>): Result<List<Pokemon>> =
         safeDbCall {
-            appDatabase.pokemonDAO().getEvolutionsByIds(ids).toPokemonDomain()
+            appDatabase.pokemonDAO().getEvolutionsByIds(ids)?.toPokemonDomain()
         }
 
     override suspend fun addPokemon(pokemon: Pokemon): Result<Long> = safeDbCall {
         appDatabase.pokemonDAO().add(pokemon.toPokemonEntity())
     }
 
-    override suspend fun addMoreThenOnePokemon(pokemons: List<Pokemon>): Result<Long> = safeDbCall {
+    override suspend fun addMoreThenOnePokemon(pokemons: List<Pokemon>): Result<Any> = safeDbCall {
         appDatabase.pokemonDAO().addMoreThenOnePokemon(pokemons.toPokemonEntity())
     }
 

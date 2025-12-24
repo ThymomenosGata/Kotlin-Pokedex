@@ -11,19 +11,19 @@ import dev.marcosfarias.pokedex.data.local.entity.PokemonEntity
 interface PokemonDAO {
 
     @Query("SELECT * FROM pokemon WHERE id = :id")
-    fun getById(id: String?): PokemonEntity
+    fun getById(id: String?): PokemonEntity?
 
     @Query("SELECT * FROM pokemon WHERE id IN(:evolutionIds)")
-    fun getEvolutionsByIds(evolutionIds: List<String>): List<PokemonEntity>
+    fun getEvolutionsByIds(evolutionIds: List<String>): List<PokemonEntity>?
 
     @Query("SELECT * FROM pokemon")
-    fun all(): List<PokemonEntity>
+    fun getAll(): List<PokemonEntity>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun add(pokemon: PokemonEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addMoreThenOnePokemon(pokemon: List<PokemonEntity>): Long
+    fun addMoreThenOnePokemon(pokemon: List<PokemonEntity>)
 
     @Query("DELETE FROM pokemon")
     fun deleteAll(): Int

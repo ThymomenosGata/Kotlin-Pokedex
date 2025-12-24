@@ -1,7 +1,7 @@
 package dev.marcosfarias.pokedex
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import dev.marcosfarias.pokedex.model.Generation
+import dev.marcosfarias.pokedex.presentation.model.Generation
 import dev.marcosfarias.pokedex.ui.generation.GenerationViewModel
 import io.mockk.spyk
 import io.mockk.unmockkAll

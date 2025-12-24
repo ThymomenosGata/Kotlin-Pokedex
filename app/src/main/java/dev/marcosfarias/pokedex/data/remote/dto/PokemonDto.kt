@@ -4,57 +4,57 @@ import com.google.gson.annotations.SerializedName
 
 data class PokemonDto(
     @SerializedName("id")
-    val id: String,
+    val id: String?,
     @SerializedName("abilities")
-    val abilities: List<String>,
+    val abilities: List<String>?,
     @SerializedName("attack")
-    val attack: Int,
+    val attack: Int?,
     @SerializedName("base_exp")
-    val baseExp: String,
+    val baseExp: String?,
     @SerializedName("category")
-    val category: String,
+    val category: String?,
     @SerializedName("cycles")
-    val cycles: String,
+    val cycles: String?,
     @SerializedName("defense")
-    val defense: Int,
+    val defense: Int?,
     @SerializedName("egg_groups")
-    val eggGroups: String,
+    val eggGroups: String?,
     @SerializedName("evolutions")
-    val evolutions: List<String>,
+    val evolutions: List<String>?,
     @SerializedName("evolvedfrom")
-    val evolvedFrom: String,
+    val evolvedFrom: String?,
     @SerializedName("female_percentage")
-    val femalePercentage: String,
+    val femalePercentage: String?,
     @SerializedName("genderless")
-    val genderless: Int,
+    val genderless: Int?,
     @SerializedName("height")
-    val height: String,
+    val height: String?,
     @SerializedName("hp")
-    val hp: Int,
+    val hp: Int?,
     @SerializedName("imageurl")
-    val imageUrl: String,
+    val imageUrl: String?,
     @SerializedName("male_percentage")
-    val malePercentage: String,
+    val malePercentage: String?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("reason")
-    val reason: String,
+    val reason: String?,
     @SerializedName("special_attack")
-    val specialAttack: Int,
+    val specialAttack: Int?,
     @SerializedName("special_defense")
-    val specialDefense: Int,
+    val specialDefense: Int?,
     @SerializedName("speed")
-    val speed: Int,
+    val speed: Int?,
     @SerializedName("total")
-    val total: Int,
+    val total: Int?,
     @SerializedName("typeofpokemon")
-    val typeOfPokemon: List<String>,
+    val typeOfPokemon: List<String>?,
     @SerializedName("weaknesses")
-    val weaknesses: List<String>,
+    val weaknesses: List<String>?,
     @SerializedName("weight")
-    val weight: String,
+    val weight: String?,
     @SerializedName("xdescription")
-    val xDescription: String,
+    val xDescription: String?,
     @SerializedName("ydescription")
-    val yDescription: String
+    val yDescription: String?
 )

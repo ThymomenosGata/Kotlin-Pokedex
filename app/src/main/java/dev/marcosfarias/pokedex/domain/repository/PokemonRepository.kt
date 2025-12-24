@@ -16,7 +16,7 @@ interface PokemonRepository {
 
     suspend fun addPokemon(pokemon: Pokemon): Result<Long>
 
-    suspend fun addMoreThenOnePokemon(pokemons: List<Pokemon>): Result<Long>
+    suspend fun addMoreThenOnePokemon(pokemons: List<Pokemon>): Result<Any>
 
     suspend fun deleteAllPokemon(): Result<Int>
 

@@ -12,7 +12,7 @@ class PokemonColorUtil(var context: Context) {
     @ColorInt
     fun getPokemonColor(typeOfPokemon: List<String>?): Int {
         val type = typeOfPokemon?.getOrNull(0)
-        val color = when (type?.toLowerCase(Locale.ROOT)) {
+        val color = when (type?.lowercase(Locale.ROOT)) {
             "grass", "bug" -> R.color.lightTeal
             "fire" -> R.color.lightRed
             "water", "fighting", "normal" -> R.color.lightBlue
@@ -29,4 +29,25 @@ class PokemonColorUtil(var context: Context) {
     fun convertColor(@ColorRes color: Int): Int {
         return ContextCompat.getColor(context, color)
     }
+}
+
+@ColorInt
+fun List<String>?.convertToPokemonColor(context: Context): Int {
+    val type = this?.getOrNull(0)
+    val color = when (type?.lowercase(Locale.ROOT)) {
+        "grass", "bug" -> R.color.lightTeal
+        "fire" -> R.color.lightRed
+        "water", "fighting", "normal" -> R.color.lightBlue
+        "electric", "psychic" -> R.color.lightYellow
+        "poison", "ghost" -> R.color.lightPurple
+        "ground", "rock" -> R.color.lightBrown
+        "dark" -> R.color.black
+        else -> R.color.lightBlue
+    }
+    return color.convertColor(context)
+}
+
+@ColorInt
+fun Int.convertColor(context: Context): Int {
+    return ContextCompat.getColor(context, this)
 }

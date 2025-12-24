@@ -1,7 +1,7 @@
 package dev.marcosfarias.pokedex
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import dev.marcosfarias.pokedex.model.Menu
+import dev.marcosfarias.pokedex.presentation.model.Menu
 import dev.marcosfarias.pokedex.ui.home.HomeViewModel
 import io.mockk.unmockkAll
 import org.junit.*
